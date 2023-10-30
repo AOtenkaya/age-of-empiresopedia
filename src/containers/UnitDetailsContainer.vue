@@ -93,16 +93,15 @@ export default {
       const result = {};
 
       for (const key in obj) {
-        const lowerCaseKey = key.toLowerCase(); // Convert the key to lowercase
+        const lowerCaseKey = key.toLowerCase();
 
         if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-          // Recursively flatten nested objects
           const nestedObj = this.flattenObject(obj[key]);
           for (const nestedKey in nestedObj) {
             result[nestedKey] = nestedObj[nestedKey];
           }
         } else {
-          result[lowerCaseKey] = obj[key]; // Use the lowercase key in the result
+          result[lowerCaseKey] = obj[key];
         }
       }
 
