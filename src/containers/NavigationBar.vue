@@ -12,10 +12,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-    }
-  },
   computed: {
     pageName() {
       return this.$route.name || 'home';

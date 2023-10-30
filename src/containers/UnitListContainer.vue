@@ -13,6 +13,7 @@
 <script>
 import { mapState } from 'vuex'
 
+// Components
 import FiltersComponent from '@/components/FiltersComponent.vue';
 import DataTableComponent from '@/components/DataTableComponent.vue';
 

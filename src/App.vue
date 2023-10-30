@@ -17,9 +17,5 @@ export default {
   components: {
     NavigationBar,
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>
