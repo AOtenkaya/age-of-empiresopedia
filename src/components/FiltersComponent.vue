@@ -33,8 +33,10 @@
                 class="range-slider align-center"
               />
 
-              <span>{{ property.value[0] }}, </span>
-              <span>{{ property.value[1] }}</span>
+              <template v-if="property.isActive">
+                <span>{{ property.value[0] }}, </span>
+                <span>{{ property.value[1] }}</span>
+              </template>
             </div>
           </div>
         </div>
