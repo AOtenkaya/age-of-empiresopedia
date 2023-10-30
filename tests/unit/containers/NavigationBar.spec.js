@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
 import NavigationBar from '@/containers/NavigationBar.vue';
 
-describe('NavigationBar.vue', () => {
-  it('computes the correct title based on the route', () => {
+describe('NavigationBar', () => {
+  it('correctly calculates the page title', () => {
     const wrapper = mount(NavigationBar, {
       global: {
         mocks: {
@@ -13,11 +13,26 @@ describe('NavigationBar.vue', () => {
       },
     });
 
-    const pageTitle = wrapper.vm.pageTitle;
-    expect(pageTitle).toBe('Units Page');
+    expect(wrapper.vm.pageTitle).toBe('Units Page');
   });
 
-  it('computes the correct router links based on the route', () => {
+  it('correctly calculates the router links for unitList page', () => {
+    const wrapper = mount(NavigationBar, {
+      global: {
+        mocks: {
+          $route: {
+            name: 'unitList',
+          },
+        },
+      },
+    });
+
+    expect(wrapper.vm.routerLinks).toEqual([
+      { address: '/', text: 'Home' },
+    ]);
+  });
+
+  it('correctly calculates the router links for unitDetail page', () => {
     const wrapper = mount(NavigationBar, {
       global: {
         mocks: {
@@ -28,10 +43,24 @@ describe('NavigationBar.vue', () => {
       },
     });
 
-    const routerLinks = wrapper.vm.routerLinks;
-    
-    expect(routerLinks).toEqual([
+    expect(wrapper.vm.routerLinks).toEqual([
       { address: '/', text: 'Home' },
+      { address: '/units', text: 'Units' },
+    ]);
+  });
+
+  it('correctly calculates the router links for home page', () => {
+    const wrapper = mount(NavigationBar, {
+      global: {
+        mocks: {
+          $route: {
+            name: 'home',
+          },
+        },
+      },
+    });
+
+    expect(wrapper.vm.routerLinks).toEqual([
       { address: '/units', text: 'Units' },
     ]);
   });
