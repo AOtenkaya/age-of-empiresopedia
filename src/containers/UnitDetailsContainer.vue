@@ -1,14 +1,10 @@
 <template>
   <div class="unit-detail">
-    <div class="unit-detail__row" v-for="(value, key) in unitDetail" :key="key">
-      <div class="unit-detail__key">{{ key }}</div>
+    <div class="unit-detail__row" v-for="(field, index) in fieldsToShow" :key="index">
+      <div class="unit-detail__key">{{ field.text }}</div>
 
-      <div v-if="key === 'cost'" class="unit-detail__value">
-        {{ $filters.formatCost(value) }}
-      </div>
-
-      <div v-else class="unit-detail__value">
-        {{ value }}
+      <div class="unit-detail__value">
+        {{ unitDetail[field.key] ?? '-' }}
       </div>
     </div>
   </div>
@@ -22,7 +18,57 @@ export default {
 
   data() {
     return {
-      unitDetail: {}
+      unitDetail: {},
+      fieldsToShow: [
+        {
+          key: 'id',
+          text: 'ID'
+        },
+        {
+          key: 'name',
+          text: 'Name'
+        },
+        {
+          key: 'description',
+          text: 'Description'
+        },
+        {
+          key: 'age',
+          text: 'Min.Required Age'
+        },
+        {
+          key: 'wood',
+          text: 'Wood Cost'
+        },
+        {
+          key: 'food',
+          text: 'Food Cost'
+        },
+        {
+          key: 'gold',
+          text: 'Gold Cost'
+        },
+        {
+          key: 'build_time',
+          text: 'Build Time'
+        },
+        {
+          key: 'reload_time',
+          text: 'Reload Time'
+        },
+        {
+          key: 'hit_points',
+          text: 'Hit Points'
+        },
+        {
+          key: 'attack',
+          text: 'Attack'
+        },
+        {
+          key: 'accuracy',
+          text: 'Accuracy'
+        },
+      ]
     }
   },
 
@@ -40,7 +86,27 @@ export default {
 
       const selectedUnit = this.unitsList.find(unit => unit.id === parseInt(params.id))
 
-      if (selectedUnit) this.unitDetail = {...selectedUnit}
+      if (selectedUnit) this.unitDetail = this.flattenObject({...selectedUnit})
+    },
+
+    flattenObject(obj) {
+      const result = {};
+
+      for (const key in obj) {
+        const lowerCaseKey = key.toLowerCase(); // Convert the key to lowercase
+
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+          // Recursively flatten nested objects
+          const nestedObj = this.flattenObject(obj[key]);
+          for (const nestedKey in nestedObj) {
+            result[nestedKey] = nestedObj[nestedKey];
+          }
+        } else {
+          result[lowerCaseKey] = obj[key]; // Use the lowercase key in the result
+        }
+      }
+
+      return result;
     }
   }
 }
@@ -103,8 +169,12 @@ export default {
         width: 50vw;
       }
 
-      @media screen and (max-width: 1024px) {
+      @media screen and (min-width: 425px) and (max-width: 1024px) {
         width: 60vw;
+      }
+
+      @media screen and (max-width: 1024px) {
+        width: 40vw;
       }
     }
   }
