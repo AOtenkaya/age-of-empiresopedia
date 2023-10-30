@@ -32,6 +32,9 @@
                 hide-details
                 class="range-slider align-center"
               />
+
+              <span>{{ property.value[0] }}, </span>
+              <span>{{ property.value[1] }}</span>
             </div>
           </div>
         </div>
@@ -112,6 +115,8 @@ export default {
 
 .range-slider {
   width: 20vw;
+  display: inline-block;
+  margin-right: 2em;
 
   @media screen and (min-width: 768px) and (max-width: 1440px) {
     width: 30vw;
