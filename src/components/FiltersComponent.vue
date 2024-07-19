@@ -29,14 +29,10 @@
                 :min="0"
                 :step="5"
                 :color="property.color"
+                :thumb-label="property.isActive ? 'always' : true"
                 hide-details
                 class="range-slider align-center"
               />
-
-              <template v-if="property.isActive">
-                <span>{{ property.value[0] }}, </span>
-                <span>{{ property.value[1] }}</span>
-              </template>
             </div>
           </div>
         </div>
@@ -98,6 +94,7 @@ export default {
   &--range-wrapper {
     display: flex;
     align-items: center;
+    margin: 1em 0;
   }
 }
 .option {
