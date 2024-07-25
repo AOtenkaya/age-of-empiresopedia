@@ -1,6 +1,6 @@
 # age-of-empiresopedia
 
-## Dev Progress And Short Explanation
+## Short Explanation and Tech Stack
 
 This is a mini project with 3 pages: Homepage, Listing Page, and Detail Page.
 On the listing page, you can dynamically make filtering and get results from the API.
